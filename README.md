@@ -1,4 +1,4 @@
-# 📧 Email Phishing Detection
+# Email Phishing Detection
 
 An **educational** machine learning project that demonstrates, step by step, how
 phishing emails can be detected from their text using a classic
@@ -10,14 +10,14 @@ phishing emails can be detected from their text using a classic
 
 The full walkthrough is available in two languages:
 
-| Notebook | Language |
-|----------|----------|
-| [`eng.ipynb`](eng.ipynb) | English |
-| [`tr.ipynb`](tr.ipynb) | Turkish |
+| Notebook                  | Language |
+| ------------------------- | -------- |
+| [`eng.ipynb`](eng.ipynb) | English  |
+| [`tr.ipynb`](tr.ipynb)   | Turkish  |
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 
 - [Motivation](#-motivation)
 - [What Is Phishing?](#-what-is-phishing)
@@ -37,7 +37,7 @@ The full walkthrough is available in two languages:
 
 ---
 
-## 🎯 Motivation
+## Motivation
 
 Phishing is one of the most common and damaging cyber-attacks, and it is often the
 first step in larger breaches (ransomware, account takeover, corporate data leaks).
@@ -50,17 +50,17 @@ easy to explain, and reproducible from top to bottom.
 
 ---
 
-## 🔎 What Is Phishing?
+## What Is Phishing?
 
 - **Spam** is unsolicited bulk email, usually promotional and mostly harmless.
 - **Phishing** is fraudulent email designed to *trick* the recipient into revealing
   sensitive information (passwords, banking details) by impersonating a trusted
   organization.
 
-| | Spam | Phishing |
-|---|---|---|
-| **Goal** | Advertising | Stealing information / fraud |
-| **Danger** | Usually low | **High** |
+|                  | Spam         | Phishing                             |
+| ---------------- | ------------ | ------------------------------------ |
+| **Goal**   | Advertising  | Stealing information / fraud         |
+| **Danger** | Usually low  | **High**                       |
 | **Method** | Bulk sending | Impersonation + urgency + fake links |
 
 Machine learning helps because phishing emails repeatedly rely on the same signals —
@@ -69,18 +69,20 @@ credentials — which a model can learn from thousands of examples.
 
 ---
 
-## 📚 Datasets
+## Datasets
 
 Two public Kaggle datasets are used, loaded automatically through
 [`kagglehub`](https://github.com/Kaggle/kagglehub):
 
 ### 1. Main dataset — raw email text
+
 - **Source:** [`naserabdullahalam/phishing-email-dataset`](https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset) (file: `CEAS_08.csv`)
 - **Rows:** ~39,000 emails
 - **Key columns:** `subject`, `body`, `label` (`1 = phishing`, `0 = safe`)
 - Used to train the **main** model.
 
 ### 2. Comparison dataset — numerical features
+
 - **Source:** [`ethancratchley/email-phishing-dataset`](https://www.kaggle.com/datasets/ethancratchley/email-phishing-dataset)
 - **Rows:** ~525,000 emails
 - Contains **8 pre-extracted numerical features** (word count, link count,
@@ -93,7 +95,7 @@ Two public Kaggle datasets are used, loaded automatically through
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```text
 email-phishing-detection/
@@ -114,7 +116,7 @@ email-phishing-detection/
 
 ---
 
-## 🔁 Machine Learning Workflow
+## Machine Learning Workflow
 
 The notebook follows a clean, linear pipeline:
 
@@ -142,7 +144,7 @@ Live prediction on your own email
 
 ---
 
-## 📊 Exploratory Data Analysis
+## Exploratory Data Analysis
 
 Before modeling, the data is explored: class balance, missing values, and email
 length distributions.
@@ -159,7 +161,7 @@ appear more often in phishing emails:
 
 ---
 
-## 🧪 Feature Engineering
+## Feature Engineering
 
 Two different ways of representing an email are compared:
 
@@ -177,7 +179,7 @@ matters as much as the model.*
 
 ---
 
-## 🤖 Model Training
+## Model Training
 
 The main model is a **Logistic Regression** classifier — a simple, interpretable
 baseline that outputs a probability between 0 and 1.
@@ -200,13 +202,13 @@ avoid data leakage.
 
 ## 📈 Evaluation Metrics
 
-| Metric | Question it answers |
-|--------|---------------------|
-| **Accuracy** | What fraction of all predictions are correct? |
+| Metric              | Question it answers                                     |
+| ------------------- | ------------------------------------------------------- |
+| **Accuracy**  | What fraction of all predictions are correct?           |
 | **Precision** | Of the emails flagged as phishing, how many really are? |
-| **Recall** | Of all real phishing emails, how many did we catch? |
-| **F1 Score** | The balanced average of precision and recall |
-| **ROC / AUC** | The trade-off between detections and false alarms |
+| **Recall**    | Of all real phishing emails, how many did we catch?     |
+| **F1 Score**  | The balanced average of precision and recall            |
+| **ROC / AUC** | The trade-off between detections and false alarms       |
 
 In a security context, **recall** matters a lot: missing a phishing email is usually
 costlier than a false alarm on a safe one.
@@ -217,10 +219,10 @@ costlier than a false alarm on a safe one.
 
 On the held-out **20% test set** of the text dataset (`CEAS_08`):
 
-| Model | Accuracy | Precision | Recall | F1 Score |
-|-------|:--------:|:---------:|:------:|:--------:|
-| **TF-IDF + Logistic Regression** (main) | 0.99 | 0.99 | 1.00 | **0.99** |
-| 8 numerical features (balanced comparison) | 0.65 | 0.62 | 0.76 | 0.68 |
+| Model                                         | Accuracy | Precision | Recall |    F1 Score    |
+| --------------------------------------------- | :------: | :-------: | :----: | :------------: |
+| **TF-IDF + Logistic Regression** (main) |   0.99   |   0.99   |  1.00  | **0.99** |
+| 8 numerical features (balanced comparison)    |   0.65   |   0.62   |  0.76  |      0.68      |
 
 <p align="center">
   <img src="images/confusion_matrix.png" width="45%" alt="Confusion matrix" />
