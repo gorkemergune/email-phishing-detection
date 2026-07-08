@@ -4,7 +4,7 @@ An **educational** machine learning project that demonstrates, step by step, how
 phishing emails can be detected from their text using a classic
 **TF-IDF + Logistic Regression** pipeline.
 
-> ⚠️ This is a learning project built for a university presentation. It is meant to
+> This is a learning project built for a university presentation. It is meant to
 > teach the machine learning workflow — **not** a production-ready email security
 > filter.
 
@@ -19,36 +19,19 @@ The full walkthrough is available in two languages:
 
 ## Table of Contents
 
-- [Motivation](#-motivation)
 - [What Is Phishing?](#-what-is-phishing)
 - [Datasets](#-datasets)
 - [Project Structure](#-project-structure)
 - [Machine Learning Workflow](#-machine-learning-workflow)
 - [Exploratory Data Analysis](#-exploratory-data-analysis)
 - [Feature Engineering](#-feature-engineering)
-- [Model Training](#-model-training)
-- [Evaluation Metrics](#-evaluation-metrics)
 - [Results](#-results)
-- [Technologies Used](#-technologies-used)
 - [Installation](#-installation)
 - [Usage](#-usage)
-- [Future Improvements](#-future-improvements)
 - [License](#-license)
 
 ---
 
-## Motivation
-
-Phishing is one of the most common and damaging cyber-attacks, and it is often the
-first step in larger breaches (ransomware, account takeover, corporate data leaks).
-Because phishing emails share **recurring language patterns**, they are a natural fit
-for a text-classification model.
-
-This project was created as a teaching demonstration. The goal is to make each stage
-of a machine learning pipeline — from raw data to a live prediction — easy to read,
-easy to explain, and reproducible from top to bottom.
-
----
 
 ## What Is Phishing?
 
@@ -177,45 +160,7 @@ The comparison shows that the raw text carries far more signal than a handful of
 summary numbers — a practical illustration of *why the representation of the data
 matters as much as the model.*
 
----
-
-## Model Training
-
-The main model is a **Logistic Regression** classifier — a simple, interpretable
-baseline that outputs a probability between 0 and 1.
-
-```python
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-
-vectorizer = TfidfVectorizer(stop_words="english", max_features=5000, ngram_range=(1, 2))
-X_train_tfidf = vectorizer.fit_transform(X_train)
-
-model = LogisticRegression(max_iter=1000)
-model.fit(X_train_tfidf, y_train)
-```
-
-TF-IDF is fit **only** on the training data and merely applied to the test data, to
-avoid data leakage.
-
----
-
-## 📈 Evaluation Metrics
-
-| Metric              | Question it answers                                     |
-| ------------------- | ------------------------------------------------------- |
-| **Accuracy**  | What fraction of all predictions are correct?           |
-| **Precision** | Of the emails flagged as phishing, how many really are? |
-| **Recall**    | Of all real phishing emails, how many did we catch?     |
-| **F1 Score**  | The balanced average of precision and recall            |
-| **ROC / AUC** | The trade-off between detections and false alarms       |
-
-In a security context, **recall** matters a lot: missing a phishing email is usually
-costlier than a false alarm on a safe one.
-
----
-
-## 🏆 Results
+## Results
 
 On the held-out **20% test set** of the text dataset (`CEAS_08`):
 
@@ -235,18 +180,7 @@ On the held-out **20% test set** of the text dataset (`CEAS_08`):
 
 ---
 
-## 🛠️ Technologies Used
-
-- **Python 3**
-- **pandas** / **numpy** — data handling
-- **scikit-learn** — TF-IDF, Logistic Regression, metrics
-- **matplotlib** / **seaborn** — visualization
-- **kagglehub** — dataset loading
-- **Jupyter Notebook** — interactive walkthrough
-
----
-
-## ⚙️ Installation
+## Installation
 
 ```bash
 # 1. Clone the repository
@@ -266,7 +200,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Usage
+## Usage
 
 ```bash
 jupyter notebook eng.ipynb   # English version
@@ -290,17 +224,7 @@ phishing_mi(email)
 
 ---
 
-## 🚀 Future Improvements
-
-- Try stronger models (Random Forest, SVM, gradient boosting, transformers).
-- Weight the subject line and body separately.
-- Add sender / domain reputation features.
-- Handle multilingual emails.
-- Test on more diverse, real-world phishing samples.
-
----
-
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file
 for details.
